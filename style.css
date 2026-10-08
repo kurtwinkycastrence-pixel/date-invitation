@@ -1,0 +1,637 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at 10% 20%, #fff 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, #fff 0%, transparent 20%),
+        linear-gradient(135deg, #ffd5e5, #ffeaf3, #ffdbea);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    color: #914968;
+}
+
+/* MAIN */
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    padding: 20px;
+
+    position: relative;
+    z-index: 10;
+}
+
+/* CARD */
+
+.card,
+.success-card {
+    width: 100%;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    border: 3px solid #ffb4ce;
+
+    border-radius: 35px;
+
+    padding: 40px 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 60px rgba(190, 73, 119, 0.2),
+        inset 0 0 30px rgba(255, 213, 229, 0.5);
+
+    animation: cardAppear 0.8s ease;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* TOP */
+
+.top-decoration {
+    color: #f28db1;
+    font-size: 20px;
+
+    letter-spacing: 8px;
+}
+
+.bow {
+    font-size: 65px;
+
+    margin: 5px 0;
+
+    animation: bowAnimation 2s infinite;
+}
+
+@keyframes bowAnimation {
+
+    0%,
+    100% {
+        transform: rotate(-5deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(5deg) scale(1.08);
+    }
+}
+
+.tiny-title {
+    color: #d66791;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-top: 8px;
+}
+
+h1 {
+    color: #c94f82;
+
+    font-size: 44px;
+
+    margin-top: 12px;
+
+    line-height: 1.1;
+}
+
+.divider {
+    color: #ef91b2;
+
+    margin: 18px 0;
+
+    font-size: 15px;
+}
+
+.main-message {
+    max-width: 450px;
+
+    margin: auto;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    color: #9c5873;
+}
+
+/* QUESTION */
+
+.question-box {
+    margin-top: 25px;
+
+    padding: 23px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff1f7,
+            #ffe5ef
+        );
+
+    border: 2px dashed #f4a3bf;
+
+    box-shadow:
+        0 8px 20px rgba(220, 105, 145, 0.1);
+}
+
+.question-title {
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color: #d56b92;
+
+    margin-bottom: 8px;
+}
+
+.question-box h2 {
+    color: #a9446c;
+
+    font-size: 25px;
+
+    margin-bottom: 8px;
+}
+
+.question-sub {
+    color: #b66b87;
+
+    font-size: 14px;
+}
+
+/* BUTTONS */
+
+.buttons {
+    position: relative;
+
+    min-height: 75px;
+
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+button {
+    border: none;
+
+    border-radius: 50px;
+
+    padding: 15px 32px;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+#yesBtn {
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff75a9,
+            #e84e88
+        );
+
+    box-shadow:
+        0 8px 20px rgba(232, 78, 136, 0.3);
+}
+
+#yesBtn:hover {
+    transform: scale(1.12);
+
+    box-shadow:
+        0 12px 30px rgba(232, 78, 136, 0.4);
+}
+
+#noBtn {
+    color: #b45a7c;
+
+    background: #ffe1ec;
+
+    box-shadow:
+        0 5px 15px rgba(180, 90, 124, 0.1);
+
+    transition:
+        transform 0.2s ease;
+}
+
+#noBtn:hover {
+    transform: scale(0.95);
+}
+
+.hint {
+    margin-top: 15px;
+
+    font-size: 13px;
+
+    color: #c27696;
+
+    min-height: 20px;
+}
+
+.bottom-decoration {
+    color: #f29aba;
+
+    margin-top: 20px;
+
+    letter-spacing: 10px;
+}
+
+/* FLOATING HEARTS */
+
+.floating-hearts {
+    position: fixed;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.floating-hearts span {
+    position: absolute;
+
+    bottom: -60px;
+
+    opacity: 0.7;
+
+    animation: floatingHeart linear infinite;
+}
+
+.floating-hearts span:nth-child(1) {
+    left: 5%;
+    font-size: 25px;
+    animation-duration: 8s;
+}
+
+.floating-hearts span:nth-child(2) {
+    left: 15%;
+    font-size: 20px;
+    animation-duration: 11s;
+    animation-delay: 2s;
+}
+
+.floating-hearts span:nth-child(3) {
+    left: 27%;
+    font-size: 30px;
+    animation-duration: 9s;
+    animation-delay: 1s;
+}
+
+.floating-hearts span:nth-child(4) {
+    left: 40%;
+    font-size: 22px;
+    animation-duration: 12s;
+    animation-delay: 3s;
+}
+
+.floating-hearts span:nth-child(5) {
+    left: 55%;
+    font-size: 28px;
+    animation-duration: 10s;
+}
+
+.floating-hearts span:nth-child(6) {
+    left: 68%;
+    font-size: 20px;
+    animation-duration: 9s;
+    animation-delay: 2s;
+}
+
+.floating-hearts span:nth-child(7) {
+    left: 78%;
+    font-size: 30px;
+    animation-duration: 12s;
+    animation-delay: 4s;
+}
+
+.floating-hearts span:nth-child(8) {
+    left: 88%;
+    font-size: 23px;
+    animation-duration: 8s;
+    animation-delay: 1s;
+}
+
+.floating-hearts span:nth-child(9) {
+    left: 50%;
+    font-size: 18px;
+    animation-duration: 13s;
+    animation-delay: 5s;
+}
+
+.floating-hearts span:nth-child(10) {
+    left: 95%;
+    font-size: 28px;
+    animation-duration: 10s;
+    animation-delay: 2s;
+}
+
+@keyframes floatingHeart {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            translateY(-110vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+/* SUCCESS CARD */
+
+.success-card {
+    display: none;
+}
+
+.celebration {
+    font-size: 45px;
+
+    animation: celebration 0.8s infinite alternate;
+}
+
+@keyframes celebration {
+
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.12);
+    }
+}
+
+.yay-message {
+    margin-top: 15px;
+
+    font-size: 19px;
+
+    color: #b24b73;
+}
+
+.big-heart {
+    font-size: 70px;
+
+    margin: 10px 0;
+
+    animation: heartbeat 1s infinite;
+}
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* DATE */
+
+.date-box {
+    margin-top: 20px;
+
+    padding: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f6,
+            #ffe6ef
+        );
+
+    border: 2px solid #ffb3cc;
+
+    border-radius: 25px;
+}
+
+.date-box h2 {
+    color: #d25585;
+
+    font-size: 22px;
+
+    margin-bottom: 20px;
+}
+
+.date-item {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    padding: 12px;
+
+    margin: 8px 0;
+
+    background: rgba(255, 255, 255, 0.7);
+
+    border-radius: 15px;
+}
+
+.date-item > span {
+    font-size: 28px;
+}
+
+.date-item div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.date-item small {
+    color: #ce7195;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+}
+
+.date-item strong {
+    color: #914968;
+
+    font-size: 15px;
+}
+
+/* LOVE NOTE */
+
+.love-note {
+    margin-top: 20px;
+
+    padding: 20px;
+
+    background: #fff9fc;
+
+    border-radius: 20px;
+
+    line-height: 1.8;
+
+    border: 1px solid #ffd2e1;
+}
+
+.signature {
+    margin-top: 12px;
+
+    color: #c3547e;
+
+    font-style: italic;
+}
+
+.final-message {
+    margin-top: 20px;
+
+    color: #c14f7b;
+
+    font-weight: bold;
+
+    font-size: 17px;
+}
+
+.final-hearts {
+    margin-top: 18px;
+
+    font-size: 23px;
+
+    letter-spacing: 6px;
+}
+
+/* CONFETTI */
+
+.confetti {
+    position: fixed;
+
+    top: -40px;
+
+    pointer-events: none;
+
+    z-index: 1000;
+
+    animation:
+        confettiFall
+        3s
+        linear
+        forwards;
+}
+
+@keyframes confettiFall {
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+
+        opacity: 0;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .card,
+    .success-card {
+        padding: 30px 20px;
+    }
+
+    h1 {
+        font-size: 34px;
+    }
+
+    .question-box h2 {
+        font-size: 21px;
+    }
+
+    .main-message {
+        font-size: 15px;
+    }
+
+    .buttons {
+        gap: 10px;
+    }
+
+    button {
+        padding: 14px 25px;
+        font-size: 15px;
+    }
+}
+
