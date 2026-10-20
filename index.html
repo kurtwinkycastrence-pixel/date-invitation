@@ -93,6 +93,77 @@
         </section>
 
 
+        <!-- QUESTIONS AFTER YES -->
+        <section class="questions-card" id="questionsCard">
+
+            <div class="celebration">
+                💬 💗 ✨
+            </div>
+
+            <p class="tiny-title">
+                A FEW TINY DETAILS 💌
+            </p>
+
+            <h1>
+                Yaaaay! Let's make it extra cute 😭💕
+            </h1>
+
+            <div class="question-list">
+
+                <div class="mini-question">
+                    <p class="mini-title">1. What kind of date feels perfect?</p>
+
+                    <div class="option-grid">
+                        <button class="answer-option selected" data-group="vibe" data-value="Food date 🍽️">Food date 🍽️</button>
+                        <button class="answer-option" data-group="vibe" data-value="Movie date 🎬">Movie date 🎬</button>
+                        <button class="answer-option" data-group="vibe" data-value="Walk & talk 🌿">Walk & talk 🌿</button>
+                        <button class="answer-option" data-group="vibe" data-value="Cozy at-home date 🏡">Cozy at-home date 🏡</button>
+                    </div>
+                </div>
+
+                <div class="mini-question">
+                    <p class="mini-title">Where would you like to go?</p>
+
+                    <div class="option-grid">
+                        <button class="answer-option selected" data-group="place" data-value="Mall 🛍️">Mall 🛍️</button>
+                        <button class="answer-option" data-group="place" data-value="Park 🌳">Park 🌳</button>
+                        <button class="answer-option" data-group="place" data-value="Home 🏡">Home 🏡</button>
+                        <button class="answer-option" data-group="place" data-value="Arcade 🕹️">Arcade 🕹️</button>
+                    </div>
+                </div>
+
+                <div class="mini-question">
+                    <p class="mini-title">2. What theme color should our outfit be?</p>
+
+                    <div class="option-grid">
+                        <button class="answer-option selected" data-group="theme" data-value="Pastel pink 💗">Pastel pink 💗</button>
+                        <button class="answer-option" data-group="theme" data-value="White & black ✨">White & black ✨</button>
+                        <button class="answer-option" data-group="theme" data-value="Soft red / romantic 🌹">Soft red / romantic 🌹</button>
+                        <button class="answer-option" data-group="theme" data-value="Anything matching us 😊">Anything matching us 😊</button>
+                    </div>
+                </div>
+
+                <div class="mini-question">
+                    <p class="mini-title">3. How should we celebrate?</p>
+
+                    <div class="option-grid">
+                        <button class="answer-option selected" data-group="plan" data-value="Simple and sweet 💕">Simple and sweet 💕</button>
+                        <button class="answer-option" data-group="plan" data-value="Full romantic vibe 🌹">Full romantic vibe 🌹</button>
+                        <button class="answer-option" data-group="plan" data-value="Cute & playful 🎀">Cute & playful 🎀</button>
+                        <button class="answer-option" data-group="plan" data-value="Peaceful and teasing 🌿">Peaceful and teasing 🌿</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="buttons question-actions">
+                <button id="continueBtn">
+                    Continue 💗
+                </button>
+            </div>
+
+        </section>
+
         <!-- YES SCREEN -->
         <section class="success-card" id="successCard">
 
@@ -119,14 +190,14 @@
             <div class="date-box">
 
                 <h2>
-                    🌸 OUR LITTLE DATE 🌸
+                    🌸 OUR SIMPLE DATE LABLAB KO!🌸
                 </h2>
 
                 <div class="date-item">
                     <span>📅</span>
                     <div>
                         <small>DATE</small>
-                        <strong>October 24, 2026</strong>
+                        <strong id="dateValue">Saturday, October 24, 2026</strong>
                     </div>
                 </div>
 
@@ -134,7 +205,7 @@
                     <span>⏰</span>
                     <div>
                         <small>TIME</small>
-                        <strong>1:00 PM</strong>
+                        <strong id="timeValue">1:00 PM</strong>
                     </div>
                 </div>
 
@@ -142,7 +213,33 @@
                     <span>📍</span>
                     <div>
                         <small>PLACE</small>
-                        <strong>In a Special Place with You💕</strong>
+                        <strong id="placeValue">Mall 🛍️</strong>
+                    </div>
+                </div>
+
+                <h3 class="date-picks-title">💌 YOUR DATE PICKS</h3>
+
+                <div class="date-item">
+                    <span>🍽️</span>
+                    <div>
+                        <small>DATE STYLE</small>
+                        <strong id="dateStyleValue">Food date 🍽️</strong>
+                    </div>
+                </div>
+
+                <div class="date-item">
+                    <span>🎨</span>
+                    <div>
+                        <small>OUTFIT THEME</small>
+                        <strong id="outfitValue">Pastel pink 💗</strong>
+                    </div>
+                </div>
+
+                <div class="date-item">
+                    <span>🎉</span>
+                    <div>
+                        <small>CELEBRATION STYLE</small>
+                        <strong id="celebrationValue">Simple and sweet 💕</strong>
                     </div>
                 </div>
 
@@ -151,7 +248,7 @@
             <div class="love-note">
 
                 <p>
-                    I can't wait na po to spend some time with you. 💗
+                    I can't wait na po to spend some time with you in our 22th Monthsary. 💗
                 </p>
 
                 <p>
@@ -181,4 +278,3 @@
 
 </body>
 </html>
-

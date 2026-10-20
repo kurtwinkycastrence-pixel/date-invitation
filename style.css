@@ -40,7 +40,8 @@ body {
 /* CARD */
 
 .card,
-.success-card {
+.success-card,
+.questions-card {
     width: 100%;
 
     background: rgba(255, 255, 255, 0.94);
@@ -267,6 +268,27 @@ button {
     transform: scale(0.95);
 }
 
+.buttons.no-clicked #yesBtn {
+    position: absolute;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+}
+
+.buttons.no-clicked #yesBtn:hover {
+    transform: translateX(-50%) scale(1.12);
+}
+
+.buttons.no-clicked #noBtn {
+    position: fixed;
+    z-index: 20;
+    transform: none;
+}
+
+.buttons.no-clicked #noBtn:hover {
+    transform: scale(0.95);
+}
+
 .hint {
     margin-top: 15px;
 
@@ -400,6 +422,64 @@ button {
     }
 }
 
+/* QUESTIONS CARD */
+
+.questions-card {
+    display: none;
+    margin-top: 0;
+}
+
+.question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.mini-question {
+    background: linear-gradient(135deg, #fff5f9, #ffeef5);
+    border: 2px solid #ffd0df;
+    border-radius: 22px;
+    padding: 18px 18px 14px;
+}
+
+.mini-title {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #bf547d;
+    margin-bottom: 12px;
+}
+
+.option-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.answer-option {
+    border: 2px solid #f8bfd0;
+    background: #fff;
+    color: #8d4c67;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.answer-option.selected {
+    background: linear-gradient(135deg, #ff8bb8, #f05a95);
+    color: #fff;
+    border-color: #eb5f98;
+    box-shadow: 0 8px 16px rgba(240, 90, 149, 0.2);
+}
+
+.question-actions {
+    margin-top: 20px;
+    min-height: auto;
+}
+
 /* SUCCESS CARD */
 
 .success-card {
@@ -525,6 +605,12 @@ button {
     font-size: 15px;
 }
 
+.date-picks-title {
+    margin: 18px 0 10px;
+    color: #d25585;
+    font-size: 16px;
+}
+
 /* LOVE NOTE */
 
 .love-note {
@@ -609,7 +695,8 @@ button {
     }
 
     .card,
-    .success-card {
+    .success-card,
+    .questions-card {
         padding: 30px 20px;
     }
 
@@ -634,4 +721,3 @@ button {
         font-size: 15px;
     }
 }
-

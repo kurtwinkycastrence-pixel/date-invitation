@@ -2,16 +2,64 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+    const continueBtn = document.getElementById("continueBtn");
 
     const hint = document.getElementById("hint");
 
     const invitationCard =
         document.getElementById("invitationCard");
 
+    const questionsCard =
+        document.getElementById("questionsCard");
+
     const successCard =
         document.getElementById("successCard");
 
+    const dateValue = document.getElementById("dateValue");
+    const timeValue = document.getElementById("timeValue");
+    const placeValue = document.getElementById("placeValue");
+    const dateStyleValue = document.getElementById("dateStyleValue");
+    const outfitValue = document.getElementById("outfitValue");
+    const celebrationValue = document.getElementById("celebrationValue");
+
     let noClicks = 0;
+    let audioContext;
+
+    function playButtonSound(notes) {
+        const AudioContextClass =
+            window.AudioContext || window.webkitAudioContext;
+
+        if (!AudioContextClass) {
+            return;
+        }
+
+        if (!audioContext) {
+            audioContext = new AudioContextClass();
+        }
+
+        if (audioContext.state === "suspended") {
+            audioContext.resume();
+        }
+
+        const startTime = audioContext.currentTime;
+
+        notes.forEach(function (note) {
+            const oscillator = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            const noteStart = startTime + note.delay;
+            const noteEnd = noteStart + note.duration;
+
+            oscillator.type = "sine";
+            oscillator.frequency.setValueAtTime(note.frequency, noteStart);
+            gain.gain.setValueAtTime(0.0001, noteStart);
+            gain.gain.exponentialRampToValueAtTime(0.12, noteStart + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, noteEnd);
+            oscillator.connect(gain);
+            gain.connect(audioContext.destination);
+            oscillator.start(noteStart);
+            oscillator.stop(noteEnd);
+        });
+    }
 
     const messages = [
         "Are you sure? 🥺",
@@ -31,6 +79,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     noBtn.addEventListener("click", function () {
 
+        playButtonSound([
+            { frequency: 560, duration: 0.16, delay: 0 },
+            { frequency: 360, duration: 0.2, delay: 0.08 }
+        ]);
+
         noClicks++;
 
         const messageIndex =
@@ -42,43 +95,37 @@ document.addEventListener("DOMContentLoaded", function () {
         hint.textContent =
             messages[messageIndex];
 
+        const buttons =
+            document.querySelector("#invitationCard .buttons");
+        buttons.classList.add("no-clicked");
 
-        /* Make YES button bigger */
+        const desiredScale = Math.pow(1.35, noClicks);
+        const yesScale = Math.min(
+            desiredScale,
+            (window.innerWidth * 0.65) / yesBtn.offsetWidth,
+            (window.innerHeight * 0.55) / yesBtn.offsetHeight
+        );
 
-        if (noClicks >= 3) {
-
-            yesBtn.style.transform =
-                "scale(1.08)";
-        }
-
+        yesBtn.style.transform =
+            "translateX(-50%) scale(" + yesScale + ")";
 
         if (noClicks >= 5) {
 
             yesBtn.innerHTML =
                 "YES PLEASE! 💖";
-
-            yesBtn.style.transform =
-                "scale(1.15)";
         }
 
 
         /* Make NO button escape */
 
-        if (noClicks < 8) {
-
-            moveNoButton();
-        }
-
-
-        /* Eventually remove NO */
-
-        if (noClicks >= 8) {
-
+        if (noClicks >= 10) {
             noBtn.style.display =
                 "none";
 
             hint.textContent =
                 "Hehehe... I knew you'd say yes. 💗🎀";
+        } else {
+            moveNoButton();
         }
 
     });
@@ -89,39 +136,36 @@ document.addEventListener("DOMContentLoaded", function () {
     ========================= */
 
     function moveNoButton() {
+        const yesRect = yesBtn.getBoundingClientRect();
+        const noWidth = noBtn.offsetWidth;
+        const noHeight = noBtn.offsetHeight;
+        const margin = 12;
+        const gap = 10;
+        const maxLeft = window.innerWidth - noWidth - margin;
+        const maxTop = window.innerHeight - noHeight - margin;
+        const positions = [
+            { left: yesRect.right + gap, top: yesRect.top + (yesRect.height - noHeight) / 2 },
+            { left: yesRect.left - noWidth - gap, top: yesRect.top + (yesRect.height - noHeight) / 2 },
+            { left: yesRect.left + (yesRect.width - noWidth) / 2, top: yesRect.bottom + gap },
+            { left: yesRect.left + (yesRect.width - noWidth) / 2, top: yesRect.top - noHeight - gap }
+        ].map(function (position) {
+            return {
+                left: Math.max(margin, Math.min(position.left, maxLeft)),
+                top: Math.max(margin, Math.min(position.top, maxTop))
+            };
+        }).filter(function (position) {
+            return position.left + noWidth <= yesRect.left ||
+                position.left >= yesRect.right ||
+                position.top + noHeight <= yesRect.top ||
+                position.top >= yesRect.bottom;
+        });
 
-        const buttons =
-            document.querySelector(".buttons");
-
-        const buttonWidth =
-            noBtn.offsetWidth;
-
-        const containerWidth =
-            buttons.offsetWidth;
-
-        const maxX =
-            Math.max(
-                20,
-                (containerWidth - buttonWidth) / 2
-            );
-
-        const randomX =
-            Math.random() *
-            (maxX * 2) -
-            maxX;
-
-        const randomY =
-            Math.random() * 70 -
-            35;
-
-        noBtn.style.transform =
-            "translate(" +
-            randomX +
-            "px, " +
-            randomY +
-            "px)";
+        if (positions.length > 0) {
+            const position = positions[Math.floor(Math.random() * positions.length)];
+            noBtn.style.left = position.left + "px";
+            noBtn.style.top = position.top + "px";
+        }
     }
-
 
     /* =========================
        YES BUTTON
@@ -129,17 +173,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
     yesBtn.addEventListener("click", function () {
 
+        playButtonSound([
+            { frequency: 523.25, duration: 0.18, delay: 0 },
+            { frequency: 659.25, duration: 0.18, delay: 0.12 },
+            { frequency: 783.99, duration: 0.28, delay: 0.24 }
+        ]);
+
         invitationCard.style.display =
             "none";
 
-        successCard.style.display =
+        questionsCard.style.display =
             "block";
 
         document.body.style.overflow =
             "auto";
 
-        createConfetti();
+    });
 
+    document.querySelectorAll(".answer-option").forEach(function (option) {
+        option.addEventListener("click", function () {
+            const group = option.dataset.group;
+            const parent = option.closest(".mini-question");
+            const options = parent.querySelectorAll(".answer-option");
+
+            options.forEach(function (item) {
+                item.classList.remove("selected");
+            });
+
+            option.classList.add("selected");
+
+            if (group === "vibe") {
+                dateStyleValue.textContent = option.dataset.value;
+            }
+
+            if (group === "place") {
+                placeValue.textContent = option.dataset.value;
+            }
+
+            if (group === "theme") {
+                outfitValue.textContent = option.dataset.value;
+            }
+
+            if (group === "plan") {
+                celebrationValue.textContent = option.dataset.value;
+            }
+        });
+    });
+
+    continueBtn.addEventListener("click", function () {
+        dateValue.textContent = "Saturday, October 24, 2026";
+        timeValue.textContent = "1:00 PM";
+
+        questionsCard.style.display = "none";
+        successCard.style.display = "block";
+        createConfetti();
     });
 
 
@@ -206,4 +293,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
-
