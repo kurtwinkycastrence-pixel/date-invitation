@@ -202,6 +202,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             option.classList.add("selected");
 
+            if (group === "date") {
+                dateValue.textContent = option.dataset.value;
+            }
+
             if (group === "vibe") {
                 dateStyleValue.textContent = option.dataset.value;
             }
@@ -221,7 +225,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     continueBtn.addEventListener("click", function () {
-        dateValue.textContent = "Saturday, October 24, 2026";
         timeValue.textContent = "1:00 PM";
 
         questionsCard.style.display = "none";
